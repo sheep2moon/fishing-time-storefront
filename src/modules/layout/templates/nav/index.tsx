@@ -4,12 +4,16 @@ import { useMobileMenu } from "@lib/context/mobile-menu-context"
 import Hamburger from "@modules/common/components/hamburger"
 import CartDropdown from "@modules/layout/components/cart-dropdown"
 import DropdownMenu from "@modules/layout/components/dropdown-menu"
-import MobileMenu from "@modules/mobile-menu/templates"
 import DesktopSearchModal from "@modules/search/templates/desktop-search-modal"
 import clsx from "clsx"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
+import { cn } from "../../../../lib/util/cn"
+import CategoriesNavigationMenu from "./categories-navigation-menu"
+import CartSheet from "../../components/cart-sheet"
+import MobileMenu from "../../../mobile-menu"
+import { InternalLink } from "../../../common/components/internal-link"
 
 const Nav = () => {
   const pathname = usePathname()
@@ -43,50 +47,45 @@ const Nav = () => {
 
   return (
     <div
-      className={clsx("sticky top-0 inset-x-0 z-50 group", {
+      className={clsx("sticky bg-primary top-0 left-0 right-0 z-50 group", {
         "!fixed": isHome,
       })}
     >
       <header
-        className={clsx(
-          "relative h-16 px-8 mx-auto transition-colors bg-transparent border-b border-transparent duration-200 group-hover:bg-white group-hover:border-gray-200",
-          {
-            "!bg-white !border-gray-200": !isHome || isScrolled,
-          }
+        className={cn(
+          "relative py-2 px-2 sm:px-8 mx-auto max-w-screen-2xlarge transition-colors border-b border-transparent duration-200 group-hover:bg-white group-hover:border-gray-200 text-primary-950"
         )}
       >
         <nav
-          className={clsx(
-            "text-gray-900 flex items-center justify-between w-full h-full text-small-regular transition-colors duration-200",
-            {
-              "text-white group-hover:text-gray-900": isHome && !isScrolled,
-            }
+          className={cn(
+            "flex items-center flex-col justify-between w-full text-small-regular transition-colors duration-200"
           )}
         >
-          <div className="flex-1 basis-0 h-full flex items-center">
-            <div className="block small:hidden">
-              <Hamburger setOpen={toggle} />
+          <div className="flex w-full items-center justify-between">
+            <div className="flex-1 basis-0 h-full flex items-center">
+              <div className="sm:hidden">
+                <MobileMenu />
+              </div>
             </div>
-            <div className="hidden small:block h-full">
-              <DropdownMenu />
-            </div>
-          </div>
 
-          <div className="flex items-center h-full">
-            <Link href="/" className="text-xl-semi uppercase">
-              Acme
-            </Link>
-          </div>
-
-          <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end">
-            <div className="hidden small:flex items-center gap-x-6 h-full">
-              {process.env.FEATURE_SEARCH_ENABLED && <DesktopSearchModal />}
-              <Link href="/account">Account</Link>
+            <div className="flex items-center h-full">
+              <Link href="/" className="text-xl-semi uppercase">
+                Fishing Time
+              </Link>
             </div>
-            <CartDropdown />
+
+            <div className="flex items-center gap-x-2 h-full flex-1 basis-0 justify-end">
+              <div className="hidden small:flex items-center gap-x-2 h-full">
+                {process.env.FEATURE_SEARCH_ENABLED && <DesktopSearchModal />}
+                <InternalLink variant="link" href="/account">
+                  Konto
+                </InternalLink>
+              </div>
+              <CartSheet />
+            </div>
           </div>
+          <CategoriesNavigationMenu />
         </nav>
-        <MobileMenu />
       </header>
     </div>
   )

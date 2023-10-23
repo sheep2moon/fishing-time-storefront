@@ -10,7 +10,6 @@ import {
   useUpdateLineItem,
 } from "medusa-react"
 import React, { useEffect, useState } from "react"
-import { useCartDropdown } from "./cart-dropdown-context"
 import { useSearchParams } from "next/navigation"
 
 interface VariantInfoProps {
@@ -53,7 +52,6 @@ const REGION_KEY = "medusa_region"
 export const StoreProvider = ({ children }: StoreProps) => {
   const { cart, setCart, createCart, updateCart } = useCart()
   const [countryCode, setCountryCode] = useState<string | undefined>(undefined)
-  const { timedOpen } = useCartDropdown()
   const addLineItem = useCreateLineItem(cart?.id!)
   const removeLineItem = useDeleteLineItem(cart?.id!)
   const adjustLineItem = useUpdateLineItem(cart?.id!)
@@ -256,7 +254,6 @@ export const StoreProvider = ({ children }: StoreProps) => {
         onSuccess: ({ cart }) => {
           setCart(cart)
           storeCart(cart.id)
-          timedOpen()
         },
         onError: (error) => {
           handleError(error)

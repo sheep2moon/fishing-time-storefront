@@ -1,7 +1,7 @@
 import { Cart } from "@medusajs/medusa"
-import Button from "@modules/common/components/button"
 import CartTotals from "@modules/common/components/cart-totals"
 import Link from "next/link"
+import { Button } from "../../common/components/button"
 
 type SummaryProps = {
   cart: Omit<Cart, "refundable_amount" | "refunded_total">

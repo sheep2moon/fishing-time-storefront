@@ -50,9 +50,11 @@ export type AppPropsWithLayout<P = {}, IP = P> = AppProps<P> & {
 
 export type ProductPreviewType = {
   id: string
+  variant_id: string | null
   title: string
   handle: string | null
   thumbnail: string | null
+  is_available?: boolean
   price?: {
     calculated_price: string
     original_price: string

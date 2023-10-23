@@ -1,5 +1,5 @@
-import Button from "@modules/common/components/button"
 import Link from "next/link"
+import { Button } from "../../../common/components/button"
 
 const SignInPrompt = () => {
   return (

@@ -1,6 +1,6 @@
-import { Image as MedusaImage } from "@medusajs/medusa"
+import type { Image as MedusaImage } from "@medusajs/client-types"
 import Image from "next/image"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 
 type ImageGalleryProps = {
   images: MedusaImage[]
@@ -8,68 +8,42 @@ type ImageGalleryProps = {
 
 const ImageGallery = ({ images }: ImageGalleryProps) => {
   const imageRefs = useRef<(HTMLDivElement | null)[]>([])
-
-  const handleScrollTo = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest",
-      })
-    }
-  }
+  const [currentImage, setCurrentImage] = useState(0)
 
   return (
-    <div className="flex items-start relative">
-      <div className="hidden small:flex flex-col gap-y-4 sticky top-20">
-        {images.map((image, index) => {
-          return (
-            <button
-              key={image.id}
-              className="h-14 w-12 relative border border-white"
-              onClick={() => {
-                handleScrollTo(image.id)
-              }}
-            >
-              <span className="sr-only">Go to image {index + 1}</span>
-              <Image
-                src={image.url}
-                className="absolute inset-0"
-                alt="Thumbnail"
-                fill
-                sizes="100vw"
-                style={{
-                  objectFit: "cover",
+    <div className="flex items-start relative w-full mx-auto">
+      <div className="flex flex-col flex-1 small:mx-16 gap-y-4 ">
+        <div className="relative aspect-square w-full  my-1 shadow-md">
+          <Image
+            src={images[currentImage]?.url}
+            layout="fill"
+            objectFit="contain"
+            className="absolute inset-0"
+            alt={`podgląd produktu ${currentImage + 1}`}
+          />
+        </div>
+        <div className=" flex gap-x-2 flex-wrap px-2 ">
+          {images.map((image, index) => {
+            return (
+              <button
+                key={image.id}
+                className="h-20 small:h-28 aspect-square relative border  border-black/10 rounded-sm"
+                onClick={() => {
+                  setCurrentImage(index)
                 }}
-              />
-            </button>
-          )
-        })}
-      </div>
-      <div className="flex flex-col flex-1 small:mx-16 gap-y-4">
-        {images.map((image, index) => {
-          return (
-            <div
-              ref={(image) => imageRefs.current.push(image)}
-              key={image.id}
-              className="relative aspect-[29/34] w-full"
-              id={image.id}
-            >
-              <Image
-                src={image.url}
-                priority={index <= 2 ? true : false}
-                className="absolute inset-0"
-                alt={`Product image ${index + 1}`}
-                fill
-                sizes="100vw"
-                style={{
-                  objectFit: "cover",
-                }}
-              />
-            </div>
-          )
-        })}
+              >
+                <span className="sr-only">Idź do zdjęcia {index + 1}</span>
+                <Image
+                  src={image.url}
+                  layout="fill"
+                  objectFit="contain"
+                  className="absolute inset-0 "
+                  alt="Thumbnail"
+                />
+              </button>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

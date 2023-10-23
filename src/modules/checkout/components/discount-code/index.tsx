@@ -1,12 +1,12 @@
 import { medusaClient } from "@lib/config"
 import { Cart } from "@medusajs/medusa"
-import Button from "@modules/common/components/button"
-import Input from "@modules/common/components/input"
 import Trash from "@modules/common/icons/trash"
 import { formatAmount, useCart, useUpdateCart } from "medusa-react"
 import React, { useMemo } from "react"
 import { useForm } from "react-hook-form"
 import { useMutation } from "@tanstack/react-query"
+import { Input } from "../../../common/components/input"
+import { Button } from "../../../common/components/button"
 
 type DiscountFormValues = {
   discount_code: string
@@ -115,17 +115,14 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
           <form onSubmit={handleSubmit(onApply)} className="w-full">
             <div className="grid grid-cols-[1fr_80px] gap-x-2">
               <Input
-                label="Code"
                 {...register("discount_code", {
                   required: "Code is required",
                 })}
-                errors={errors}
               />
               <div>
                 <Button
                   className="!min-h-[0] h-[46px] w-[80px]"
                   disabled={isLoading}
-                  isLoading={isLoading}
                 >
                   Apply
                 </Button>

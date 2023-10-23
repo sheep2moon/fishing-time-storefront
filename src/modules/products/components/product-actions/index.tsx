@@ -1,22 +1,23 @@
 import { useProductActions } from "@lib/context/product-context"
 import useProductPrice from "@lib/hooks/use-product-price"
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
-import Button from "@modules/common/components/button"
-import OptionSelect from "@modules/products/components/option-select"
 import clsx from "clsx"
 import Link from "next/link"
 import React, { useMemo } from "react"
-import { Product } from "types/medusa"
+import { Button } from "../../../common/components/button"
+import ProductVariantSelector from "../product-variant-selector"
+import { PricedProduct } from "@medusajs/client-types"
 
 type ProductActionsProps = {
   product: PricedProduct
 }
 
 const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
-  const { updateOptions, addToCart, options, inStock, variant } =
-    useProductActions()
+  const { addToCart, inStock, currentVariant } = useProductActions()
 
-  const price = useProductPrice({ id: product.id!, variantId: variant?.id })
+  const price = useProductPrice({
+    id: product.id!,
+    variantId: currentVariant?.id,
+  })
 
   const selectedPrice = useMemo(() => {
     const { variantPrice, cheapestPrice } = price
@@ -36,22 +37,14 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
       )}
       <h3 className="text-xl-regular">{product.title}</h3>
 
-      <p className="text-base-regular">{product.description}</p>
+      <pre className="text-base-regular font-sans whitespace-pre-wrap">
+        {product.description}
+      </pre>
 
-      {product.variants.length > 1 && (
+      {product.variants && product.variants.length > 1 && (
         <div className="my-8 flex flex-col gap-y-6">
-          {(product.options || []).map((option) => {
-            return (
-              <div key={option.id}>
-                <OptionSelect
-                  option={option}
-                  current={options[option.id]}
-                  updateOption={updateOptions}
-                  title={option.title}
-                />
-              </div>
-            )
-          })}
+          <h4>Wybierz wariant produktu</h4>
+          <ProductVariantSelector variants={product.variants} />
         </div>
       )}
 
@@ -68,7 +61,7 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
             {selectedPrice.price_type === "sale" && (
               <>
                 <p>
-                  <span className="text-gray-500">Original: </span>
+                  <span className="text-gray-500">Wcześniej: </span>
                   <span className="line-through">
                     {selectedPrice.original_price}
                   </span>
@@ -84,8 +77,8 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
         )}
       </div>
 
-      <Button onClick={addToCart}>
-        {!inStock ? "Out of stock" : "Add to cart"}
+      <Button onClick={addToCart} variant="secondary">
+        {!inStock ? "Brak w magazynie" : "Dodaj do koszyka"}
       </Button>
     </div>
   )

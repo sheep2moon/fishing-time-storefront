@@ -2,14 +2,14 @@ import usePreviews from "@lib/hooks/use-previews"
 import getNumberOfSkeletons from "@lib/util/get-number-of-skeletons"
 import repeat from "@lib/util/repeat"
 import { StoreGetProductsParams } from "@medusajs/medusa"
-import Button from "@modules/common/components/button"
 import SkeletonProductPreview from "@modules/skeletons/components/skeleton-product-preview"
 import { useCart } from "medusa-react"
 import { useMemo } from "react"
 import { useInfiniteQuery } from "@tanstack/react-query"
 import ProductPreview from "../product-preview"
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 import { getProductsList } from "@lib/data"
+import { Button } from "../../../common/components/button"
+import { PricedProduct } from "@medusajs/client-types"
 
 type RelatedProductsProps = {
   product: PricedProduct
@@ -66,7 +66,7 @@ const RelatedProducts = ({ product }: RelatedProductsProps) => {
 
       <ul className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-4 gap-x-4 gap-y-8">
         {previews.map((p) => (
-          <li key={p.id}>
+          <li key={p.variant_id}>
             <ProductPreview {...p} />
           </li>
         ))}
@@ -86,12 +86,8 @@ const RelatedProducts = ({ product }: RelatedProductsProps) => {
       </ul>
       {hasNextPage && (
         <div className="flex items-center justify-center mt-8">
-          <Button
-            isLoading={isLoading}
-            onClick={() => fetchNextPage()}
-            className="w-72"
-          >
-            Load more
+          <Button onClick={() => fetchNextPage()} className="w-72">
+            Załaduj więcej
           </Button>
         </div>
       )}

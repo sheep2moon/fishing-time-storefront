@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 
 const Home = () => {
   return (
-    <>
-      <Hero />
+    <div className="mt-16">
+      {/* <Hero /> */}
       <FeaturedProducts />
-    </>
+    </div>
   )
 }
 

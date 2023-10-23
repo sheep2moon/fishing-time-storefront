@@ -2,7 +2,6 @@ import { Dialog, Transition } from "@headlessui/react"
 import { useProductActions } from "@lib/context/product-context"
 import useProductPrice from "@lib/hooks/use-product-price"
 import useToggleState from "@lib/hooks/use-toggle-state"
-import Button from "@modules/common/components/button"
 import ChevronDown from "@modules/common/icons/chevron-down"
 import X from "@modules/common/icons/x"
 import clsx from "clsx"
@@ -10,6 +9,7 @@ import React, { Fragment, useMemo } from "react"
 import { Product } from "types/medusa"
 import OptionSelect from "../option-select"
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
+import { Button } from "../../../common/components/button"
 
 type MobileActionsProps = {
   product: PricedProduct

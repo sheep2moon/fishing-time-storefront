@@ -10,15 +10,21 @@ import clsx from "clsx"
 import { chunk } from "lodash"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
+import { useProductCategories } from "medusa-react"
 
 const DropdownMenu = () => {
   const [open, setOpen] = useState(false)
   const { push } = useRouter()
-  const { data: collections, isLoading: loadingCollections } =
-    useNavigationCollections()
-  const { data: products, isLoading: loadingProducts } =
-    useFeaturedProductsQuery()
+  const { product_categories } = useProductCategories()
+
+  useEffect(() => {
+    console.log("categories", product_categories)
+  }, [product_categories])
+  // const { data: collections, isLoading: loadingCollections } =
+  //   useNavigationCollections()
+  // const { data: products, isLoading: loadingProducts } =
+  //   useFeaturedProductsQuery()
 
   return (
     <div
@@ -58,9 +64,9 @@ const DropdownMenu = () => {
                   <div className="flex items-start content-container">
                     <div className="flex flex-col flex-1 max-w-[30%]">
                       <h3 className="text-base-semi text-gray-900 mb-4">
-                        Collections
+                        Kategorie
                       </h3>
-                      <div className="flex items-start">
+                      {/* <div className="flex items-start">
                         {collections &&
                           chunk(collections, 6).map((chunk, index) => {
                             return (
@@ -93,9 +99,57 @@ const DropdownMenu = () => {
                               className="w-12 h-4 bg-gray-100 animate-pulse"
                             />
                           ))}
+                      </div> */}
+                      <div>
+                        {product_categories && (
+                          <div className="flex flex-col gap-y-2">
+                            <ul className="grid grid-cols-1 gap-2">
+                              {product_categories?.map((c) => {
+                                if (c.parent_category) {
+                                  return
+                                }
+
+                                const children =
+                                  c.category_children?.map((child) => ({
+                                    name: child.name,
+                                    handle: child.handle,
+                                    id: child.id,
+                                  })) || null
+
+                                return (
+                                  <li
+                                    className="flex flex-col gap-2"
+                                    key={c.id}
+                                  >
+                                    <Link
+                                      className={clsx(
+                                        children && "text-small-semi"
+                                      )}
+                                      href={`/${c.handle}`}
+                                    >
+                                      {c.name}
+                                    </Link>
+                                    {children && (
+                                      <ul className="grid grid-cols-1 ml-3 gap-2">
+                                        {children &&
+                                          children.map((child) => (
+                                            <li key={child.id}>
+                                              <Link href={`/${child.handle}`}>
+                                                {child.name}
+                                              </Link>
+                                            </li>
+                                          ))}
+                                      </ul>
+                                    )}
+                                  </li>
+                                )
+                              })}
+                            </ul>
+                          </div>
+                        )}
                       </div>
                     </div>
-                    <div className="flex-1">
+                    {/* <div className="flex-1">
                       <div className="grid grid-cols-3 gap-4">
                         {products?.slice(0, 3).map((product) => (
                           <ProductPreview {...product} key={product.id} />
@@ -105,7 +159,7 @@ const DropdownMenu = () => {
                             <SkeletonProductPreview key={index} />
                           ))}
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </Popover.Panel>

@@ -10,7 +10,6 @@ import { useSearchBox, UseSearchBoxProps } from "react-instantsearch-hooks-web"
 
 export type ControlledSearchBoxProps = React.ComponentProps<"div"> & {
   inputRef: RefObject<HTMLInputElement>
-  isSearchStalled: boolean
   onChange(event: ChangeEvent): void
   onReset(event: FormEvent): void
   onSubmit?(event: FormEvent): void
@@ -22,7 +21,6 @@ type SearchBoxProps = {
   children: (state: {
     value: string
     inputRef: RefObject<HTMLInputElement>
-    isSearchStalled: boolean
     onChange: (event: ChangeEvent<HTMLInputElement>) => void
     onReset: () => void
     placeholder: string
@@ -32,10 +30,10 @@ type SearchBoxProps = {
 
 const SearchBoxWrapper = ({
   children,
-  placeholder = "Search products...",
+  placeholder = "Szukaj produktu...",
   ...rest
 }: SearchBoxProps) => {
-  const { query, refine, isSearchStalled } = useSearchBox(rest)
+  const { query, refine } = useSearchBox(rest)
   const [value, setValue] = useState(query)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -74,7 +72,6 @@ const SearchBoxWrapper = ({
   const state = {
     value,
     inputRef,
-    isSearchStalled,
     onChange,
     onReset,
     placeholder,

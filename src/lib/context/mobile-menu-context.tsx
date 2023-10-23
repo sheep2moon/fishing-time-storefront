@@ -72,9 +72,7 @@ export const useMobileMenu = () => {
   const context = useContext(MobileMenuContext)
 
   if (context === null) {
-    throw new Error(
-      "useCartDropdown must be used within a CartDropdownProvider"
-    )
+    throw new Error("useMobileMenu must be used within a MobileMenuProvider")
   }
 
   return context

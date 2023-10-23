@@ -31,6 +31,7 @@ export default async function ProductPage({ params }: Props) {
   const { products } = await getProductByHandle(params.handle).catch((err) => {
     notFound()
   })
+  console.log("products", products)
 
   return <ProductTemplate product={products[0]} />
 }

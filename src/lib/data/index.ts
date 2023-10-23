@@ -1,18 +1,11 @@
-import medusaRequest from "../medusa-fetch"
 import {
-  StoreGetProductsParams,
   Product,
   ProductCategory,
   ProductCollection,
-} from "@medusajs/medusa"
+  StoreGetProductsParams,
+} from "@medusajs/client-types"
+import medusaRequest from "../medusa-fetch"
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
-
-export type ProductCategoryWithChildren = Omit<
-  ProductCategory,
-  "category_children"
-> & {
-  category_children: ProductCategory[]
-}
 
 /**
  * This file contains functions for fetching products and collections from the Medusa API or the Medusa Product Module,
@@ -266,7 +259,7 @@ export async function getCategoriesList(
   offset: number = 0,
   limit?: number
 ): Promise<{
-  product_categories: ProductCategoryWithChildren[]
+  product_categories: ProductCategory[]
   count: number
 }> {
   if (PRODUCT_MODULE_ENABLED) {
@@ -318,30 +311,13 @@ export async function getCategoriesList(
  * @returns nextPage (number) - The offset of the next page of products
  */
 export async function getCategoryByHandle(categoryHandle: string[]): Promise<{
-  product_categories: ProductCategoryWithChildren[]
+  product_category: ProductCategory
 }> {
-  if (PRODUCT_MODULE_ENABLED) {
-    const data = await fetch(
-      `${API_BASE_URL}/api/categories/${categoryHandle}`,
-      {
-        next: {
-          tags: ["categories"],
-        },
-      }
-    )
-      .then((res) => res.json())
-      .catch((err) => {
-        throw err
-      })
-
-    return data
-  }
-
   const handles = categoryHandle.map((handle: string, index: number) =>
     categoryHandle.slice(0, index + 1).join("/")
   )
 
-  const product_categories = [] as ProductCategoryWithChildren[]
+  let product_category: ProductCategory | null = null
 
   for (const handle of handles) {
     await medusaRequest("GET", "/product-categories", {
@@ -350,15 +326,18 @@ export async function getCategoryByHandle(categoryHandle: string[]): Promise<{
       },
     })
       .then(({ body }) => {
-        product_categories.push(body.product_categories[0])
+        product_category = body.product_categories[0]
       })
       .catch((err) => {
         throw err
       })
   }
+  if (!product_category) {
+    throw new Error("Nie znaleziono kategorii")
+  }
 
   return {
-    product_categories,
+    product_category,
   }
 }
 
@@ -405,7 +384,7 @@ export async function getProductsByCategoryHandle({
   }
 
   const { id } = await getCategoryByHandle([handle]).then(
-    (res) => res.product_categories[0]
+    (res) => res.product_category
   )
 
   const { response, nextPage } = await getProductsList({

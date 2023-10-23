@@ -14,6 +14,7 @@ const DesktopHits = ({
   ...props
 }: HitsProps<ProductHit>) => {
   const { hits } = useHits(props)
+  console.log(hits)
 
   return (
     <div
@@ -32,6 +33,7 @@ const DesktopHits = ({
             <Hit hit={hit as unknown as ProductHit} />
           </li>
         ))}
+        {hits.length === 0 && <span>Brak wyników</span>}
       </div>
     </div>
   )

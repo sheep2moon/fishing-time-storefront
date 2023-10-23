@@ -1,10 +1,7 @@
 "use client"
 
 import usePreviews from "@lib/hooks/use-previews"
-import {
-  ProductCategoryWithChildren,
-  getProductsByCategoryHandle,
-} from "@lib/data"
+import { getProductsByCategoryHandle } from "@lib/data"
 import getNumberOfSkeletons from "@lib/util/get-number-of-skeletons"
 import repeat from "@lib/util/repeat"
 import ProductPreview from "@modules/products/components/product-preview"
@@ -16,19 +13,18 @@ import { useInView } from "react-intersection-observer"
 import Link from "next/link"
 import UnderlineLink from "@modules/common/components/underline-link"
 import { notFound } from "next/navigation"
+import { ProductCategory } from "@medusajs/client-types"
 
 type CategoryTemplateProps = {
-  categories: ProductCategoryWithChildren[]
+  product_category: ProductCategory
 }
 
-const CategoryTemplate: React.FC<CategoryTemplateProps> = ({ categories }) => {
+const CategoryTemplate: React.FC<CategoryTemplateProps> = ({
+  product_category,
+}) => {
   const { cart } = useCart()
   const { ref, inView } = useInView()
-
-  const category = categories[categories.length - 1]
-  const parents = categories.slice(0, categories.length - 1)
-
-  if (!category) notFound()
+  console.log(product_category)
 
   const {
     data: infiniteData,
@@ -37,11 +33,11 @@ const CategoryTemplate: React.FC<CategoryTemplateProps> = ({ categories }) => {
     isFetchingNextPage,
     refetch,
   } = useInfiniteQuery(
-    [`get_category_products`, category.handle, cart?.id],
+    [`get_category_products`, product_category.handle, cart?.id],
     ({ pageParam }) =>
       getProductsByCategoryHandle({
         pageParam,
-        handle: category.handle!,
+        handle: product_category.handle!,
         cartId: cart?.id,
         currencyCode: cart?.region?.currency_code,
       }),
@@ -71,7 +67,7 @@ const CategoryTemplate: React.FC<CategoryTemplateProps> = ({ categories }) => {
   return (
     <div className="content-container py-6">
       <div className="flex flex-row mb-8 text-2xl-semi gap-4">
-        {parents &&
+        {/* {parents &&
           parents.map((parent) => (
             <span key={parent.id} className="text-gray-500">
               <Link
@@ -82,18 +78,18 @@ const CategoryTemplate: React.FC<CategoryTemplateProps> = ({ categories }) => {
               </Link>
               /
             </span>
-          ))}
-        <h1>{category.name}</h1>
+          ))} */}
+        <h1>{product_category.name}</h1>
       </div>
-      {category.description && (
+      {product_category.name && (
         <div className="mb-8 text-base-regular">
-          <p>{category.description}</p>
+          <p>{product_category.name}</p>
         </div>
       )}
-      {category.category_children && (
+      {product_category.category_children && (
         <div className="mb-8 text-base-large">
           <ul className="grid grid-cols-1 gap-2">
-            {category.category_children?.map((c) => (
+            {product_category.category_children?.map((c) => (
               <li key={c.id}>
                 <UnderlineLink href={`/${c.handle}`}>{c.name}</UnderlineLink>
               </li>
@@ -103,7 +99,7 @@ const CategoryTemplate: React.FC<CategoryTemplateProps> = ({ categories }) => {
       )}
       <ul className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-4 gap-x-4 gap-y-8">
         {previews.map((p) => (
-          <li key={p.id}>
+          <li key={p.variant_id}>
             <ProductPreview {...p} />
           </li>
         ))}
