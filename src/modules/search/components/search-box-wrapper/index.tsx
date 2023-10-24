@@ -6,7 +6,7 @@ import {
   useRef,
   useState,
 } from "react"
-import { useSearchBox, UseSearchBoxProps } from "react-instantsearch-hooks-web"
+import { useSearchBox, UseSearchBoxProps } from "react-instantsearch"
 
 export type ControlledSearchBoxProps = React.ComponentProps<"div"> & {
   inputRef: RefObject<HTMLInputElement>

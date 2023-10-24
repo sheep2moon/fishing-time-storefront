@@ -7,8 +7,8 @@ import RelatedProducts from "@modules/products/components/related-products"
 import ImageGallery from "@modules/products/components/image-gallary"
 import MobileActions from "@modules/products/components/mobile-actions"
 
-import { PricedProduct } from "@medusajs/client-types"
 import ProductActions from "../components/product-actions"
+import { PricedProduct } from "@medusajs/client-types"
 
 type ProductTemplateProps = {
   product: PricedProduct
@@ -17,6 +17,7 @@ type ProductTemplateProps = {
 const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
   const info = useRef<HTMLDivElement>(null)
   const inView = useIntersection(info, "0px")
+  console.log(product)
 
   return (
     <ProductProvider product={product}>

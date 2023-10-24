@@ -4,7 +4,6 @@ import Search from "@modules/common/icons/search"
 import DesktopHit from "@modules/search/components/desktop-hit"
 import DesktopHits from "@modules/search/components/desktop-hits"
 import SearchBox from "@modules/search/components/search-box"
-import { InstantSearch } from "react-instantsearch-hooks-web"
 import {
   Dialog,
   DialogContent,
@@ -16,6 +15,7 @@ import {
 } from "../../../common/components/dialog"
 import { Button } from "../../../common/components/button"
 import { Input } from "../../../common/components/input"
+import { InstantSearch } from "react-instantsearch"
 
 const DesktopSearchModal = () => {
   const { state, close, open } = useToggleState()

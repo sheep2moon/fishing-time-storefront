@@ -27,15 +27,15 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:8000"
 export async function getProductByHandle(
   handle: string
 ): Promise<{ products: PricedProduct[] }> {
-  if (PRODUCT_MODULE_ENABLED) {
-    const data = await fetch(`${API_BASE_URL}/api/products/${handle}`)
-      .then((res) => res.json())
-      .catch((err) => {
-        throw err
-      })
+  // if (PRODUCT_MODULE_ENABLED) {
+  //   const data = await fetch(`${API_BASE_URL}/api/products/${handle}`)
+  //     .then((res) => res.json())
+  //     .catch((err) => {
+  //       throw err
+  //     })
 
-    return data
-  }
+  //   return data
+  // }
 
   const { products } = await medusaRequest("GET", "/products", {
     query: {

@@ -1,8 +1,7 @@
 import clsx from "clsx"
 import React from "react"
-import { useHits, UseHitsProps } from "react-instantsearch-hooks-web"
 import { ProductHit } from "../hit"
-
+import { useHits, type UseHitsProps } from "react-instantsearch"
 type HitsProps<THit> = React.ComponentProps<"div"> &
   UseHitsProps & {
     hitComponent: (props: { hit: THit }) => JSX.Element

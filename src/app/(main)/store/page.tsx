@@ -1,9 +1,9 @@
 import { Metadata } from "next"
-import StoreTemplate from "@modules/store/templates"
+import StoreTemplate from "../../../modules/store"
 
 export const metadata: Metadata = {
-  title: "Store",
-  description: "Explore all of our products.",
+  title: "Sklep | Fishing Time",
+  description: "Przeglądaj wszystkie produkty.",
 }
 
 export default function StorePage() {

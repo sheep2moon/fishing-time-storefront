@@ -1,16 +1,31 @@
 import clsx from "clsx"
 import Link from "next/link"
-import { ProductPreviewType } from "types/global"
 import Thumbnail from "../thumbnail"
 import { cn } from "../../../../lib/util/cn"
+import { ProductVariant } from "@medusajs/client-types"
+
+export type ProductPreviewProps = {
+  title: string
+  handle: string | null
+  thumbnail: string | null
+  is_available?: boolean
+  variants: ProductVariant[]
+  price?: {
+    calculated_price: string
+    original_price: string
+    difference: string
+    price_type: "default" | "sale"
+  }
+}
 
 const ProductPreview = ({
   title,
   handle,
   thumbnail,
+  variants,
   price,
   is_available,
-}: ProductPreviewType) => {
+}: ProductPreviewProps) => {
   console.log()
 
   return (

@@ -12,12 +12,16 @@ import {
 import Link, { LinkProps } from "next/link"
 import { cn } from "../../../../lib/util/cn"
 import { ChevronRight, DotIcon } from "lucide-react"
+import { InternalLink } from "../../../common/components/internal-link"
 
 const CategoriesNavigationMenu = () => {
   const { product_categories } = useProductCategories()
 
   return (
-    <div className="w-full">
+    <div className="w-full flex items-center gap-1">
+      <InternalLink variant="outline" href={"/store"}>
+        Sklep
+      </InternalLink>
       <NavigationMenu>
         <NavigationMenuList>
           {product_categories?.map((category) => {
