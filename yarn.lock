@@ -1853,6 +1853,13 @@ algoliasearch-helper@3.14.2, algoliasearch-helper@>=3:
   dependencies:
     "@algolia/events" "^4.0.1"
 
+algoliasearch-helper@3.15.0:
+  version "3.15.0"
+  resolved "https://registry.yarnpkg.com/algoliasearch-helper/-/algoliasearch-helper-3.15.0.tgz#d680783329920a3619a74504dccb97a4fb943443"
+  integrity sha512-DGUnK3TGtDQsaUE4ayF/LjSN0DGsuYThB8WBgnnDY0Wq04K6lNVruO3LfqJOgSfDiezp+Iyt8Tj4YKHi+/ivSA==
+  dependencies:
+    "@algolia/events" "^4.0.1"
+
 algoliasearch@>=4, algoliasearch@^4.20.0:
   version "4.20.0"
   resolved "https://registry.npmjs.org/algoliasearch/-/algoliasearch-4.20.0.tgz"
@@ -4453,6 +4460,25 @@ instantsearch.js@4.58.0:
     qs "^6.5.1 < 6.10"
     search-insights "^2.6.0"
 
+instantsearch.js@4.59.0:
+  version "4.59.0"
+  resolved "https://registry.yarnpkg.com/instantsearch.js/-/instantsearch.js-4.59.0.tgz#ea9881fc0225d2d8de0d76190bcef043be12bc33"
+  integrity sha512-tMOLCXQRjOtXAi77kERx4gqHWuVtI8fzEbOzb9Fu6PFNj7MEikEQEnw9zglxnbPph52rMM1t5AN77/NMwY1krg==
+  dependencies:
+    "@algolia/events" "^4.0.1"
+    "@algolia/ui-components-highlight-vdom" "^1.2.2"
+    "@algolia/ui-components-shared" "^1.2.2"
+    "@types/dom-speech-recognition" "^0.0.1"
+    "@types/google.maps" "^3.45.3"
+    "@types/hogan.js" "^3.0.0"
+    "@types/qs" "^6.5.3"
+    algoliasearch-helper "3.15.0"
+    hogan.js "^3.0.2"
+    htm "^3.0.0"
+    preact "^10.10.0"
+    qs "^6.5.1 < 6.10"
+    search-insights "^2.6.0"
+
 internal-slot@^1.0.5:
   version "1.0.5"
   resolved "https://registry.npmjs.org/internal-slot/-/internal-slot-1.0.5.tgz"
@@ -6350,10 +6376,28 @@ react-instantsearch-core@7.2.0:
     instantsearch.js "4.58.0"
     use-sync-external-store "^1.0.0"
 
+react-instantsearch-core@7.2.1:
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/react-instantsearch-core/-/react-instantsearch-core-7.2.1.tgz#0fd3f2e2fde247eac755be1c140808b41171a484"
+  integrity sha512-jZg1zhQEyffADp8R+/B+5MrS0wEqc0AU9IdpSMhD6yCvjqhRO0S5AB3q7frj/JY/T8ARs2nF0SmCnDT6nRLn4Q==
+  dependencies:
+    "@babel/runtime" "^7.1.2"
+    algoliasearch-helper "3.15.0"
+    instantsearch.js "4.59.0"
+    use-sync-external-store "^1.0.0"
+
 react-instantsearch-nextjs@^0.1.2:
   version "0.1.2"
   resolved "https://registry.npmjs.org/react-instantsearch-nextjs/-/react-instantsearch-nextjs-0.1.2.tgz"
   integrity sha512-cwObiL5RUey3u0fVgWvK3TbuPjMPjYQVsfVClnKNf8W3wAc6Ujt8pmoZbaJSaQ02tRElF7YUtd20NeTyLqo4ew==
+
+react-instantsearch-router-nextjs@^7.2.1:
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/react-instantsearch-router-nextjs/-/react-instantsearch-router-nextjs-7.2.1.tgz#00313e79109f9458ec0c89133a286f9ebf955957"
+  integrity sha512-MwmzO2ZlaHbnTVdbyFrleCWuv4J53Mc4Vc+upLBGu+y0Vbmf5sWdym15h5Us6TDPf4uXtW5wVf/13YmnuQ3irw==
+  dependencies:
+    instantsearch.js "4.59.0"
+    react-instantsearch-core "7.2.1"
 
 react-instantsearch@^7.2.0:
   version "7.2.0"

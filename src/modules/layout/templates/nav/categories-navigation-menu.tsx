@@ -46,14 +46,14 @@ const CategoriesNavigationMenu = () => {
                           <li key={firstChild.id} className="">
                             <ListItem
                               title={firstChild.name}
-                              href={`/store?kategoria=${firstChild.handle}`}
+                              href={`/store/${firstChild.handle}`}
                             />
                             {childCategories?.length > 0 && (
                               <div className="ml-4 border-l border-primary-500/20">
                                 {childCategories.map((secondChild) => {
                                   return (
                                     <Link
-                                      href={`/store?kategoria=${secondChild.handle}`}
+                                      href={`/store/${secondChild.handle}`}
                                       key={secondChild.id}
                                       className="p-1 pl-2 transition-colors hover:bg-primary-200 hover:text-secondary-900 focus:bg-primary-200 focus:text-secondary-900 flex items-center"
                                     >

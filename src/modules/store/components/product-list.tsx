@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useMemo } from "react"
 import { useInfiniteHits } from "react-instantsearch"
 import ProductPreview from "../../products/components/product-preview"
@@ -30,11 +32,18 @@ const ProductList = () => {
   }, [hits])
 
   return (
-    <div className="lg:grid-cols-3 grid grid-cols-1 p-4 gap-2">
-      {products.map((product) => (
-        <ProductPreview {...product} key={product.handle} />
-      ))}
-    </div>
+    <>
+      {products.length > 0 && (
+        <div className="lg:grid-cols-4 grid grid-cols-1 p-4 gap-2">
+          {products.map((product) => (
+            <ProductPreview {...product} key={product.handle} />
+          ))}
+        </div>
+      )}
+      {products.length === 0 && (
+        <div className="p-4 text-xl text-center w-full">Brak wyników 🙁</div>
+      )}
+    </>
   )
 }
 

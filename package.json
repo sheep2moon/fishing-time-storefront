@@ -51,6 +51,7 @@
     "react-hook-form": "^7.30.0",
     "react-instantsearch": "^7.2.0",
     "react-instantsearch-nextjs": "^0.1.2",
+    "react-instantsearch-router-nextjs": "^7.2.1",
     "react-intersection-observer": "^9.3.4",
     "sharp": "^0.30.7",
     "tailwind-merge": "^1.14.0",
