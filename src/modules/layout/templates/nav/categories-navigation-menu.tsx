@@ -18,8 +18,8 @@ const CategoriesNavigationMenu = () => {
   const { product_categories } = useProductCategories()
 
   return (
-    <div className="w-full flex items-center gap-1">
-      <InternalLink variant="outline" href={"/store"}>
+    <div className="w-full justify-center flex items-center gap-1">
+      <InternalLink variant="default" href={"/store"}>
         Sklep
       </InternalLink>
       <NavigationMenu>
@@ -46,14 +46,14 @@ const CategoriesNavigationMenu = () => {
                           <li key={firstChild.id} className="">
                             <ListItem
                               title={firstChild.name}
-                              href={`/${firstChild.handle}`}
+                              href={`/store?kategoria=${firstChild.handle}`}
                             />
                             {childCategories?.length > 0 && (
                               <div className="ml-4 border-l border-primary-500/20">
                                 {childCategories.map((secondChild) => {
                                   return (
                                     <Link
-                                      href={`/${secondChild.handle}`}
+                                      href={`/store?kategoria=${secondChild.handle}`}
                                       key={secondChild.id}
                                       className="p-1 pl-2 transition-colors hover:bg-primary-200 hover:text-secondary-900 focus:bg-primary-200 focus:text-secondary-900 flex items-center"
                                     >

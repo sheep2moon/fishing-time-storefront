@@ -2,25 +2,35 @@ import React, { useMemo } from "react"
 import { useInfiniteHits } from "react-instantsearch"
 import ProductPreview from "../../products/components/product-preview"
 import { ProductVariant } from "@medusajs/client-types"
+import { useCart } from "medusa-react"
 
-type ProductHit = {
+export type ProductHit = {
   title: string
   handle: string
   description: string | null
   thumbnail: string | null
-  variants: ProductVariant[]
+  variants: {
+    id: string
+    title: string
+    inventory_quantity: number
+    prices: {
+      amount: number
+      currency_code: "pln"
+      // price_type: "default" | "sale"
+    }[]
+  }[]
   hs_code: string | null
 }
 
 const ProductList = () => {
   const { hits, results } = useInfiniteHits()
+
   const products: ProductHit[] = useMemo(() => {
     return [...hits] as unknown as ProductHit[]
   }, [hits])
-  console.log(hits)
 
   return (
-    <div>
+    <div className="lg:grid-cols-3 grid grid-cols-1 p-4 gap-2">
       {products.map((product) => (
         <ProductPreview {...product} key={product.handle} />
       ))}

@@ -49,6 +49,13 @@ const config: Config = {
           "sans-serif",
         ],
       },
+      width: {
+        "min-content": "min-content",
+      },
+      gridTemplateColumns: {
+        // Add your custom settings here
+        "auto-fill": "repeat(auto-fill, minmax(auto, 1fr))",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

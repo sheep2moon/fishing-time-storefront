@@ -27,14 +27,6 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
 
   return (
     <div className="flex flex-col gap-y-2">
-      {product.collection && (
-        <Link
-          href={`/collections/${product.collection.handle}`}
-          className="text-small-regular text-gray-700"
-        >
-          {product.collection.title}
-        </Link>
-      )}
       <h3 className="text-xl-regular">{product.title}</h3>
 
       <pre className="text-base-regular font-sans whitespace-pre-wrap">

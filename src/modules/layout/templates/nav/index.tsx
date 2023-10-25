@@ -14,6 +14,7 @@ import CategoriesNavigationMenu from "./categories-navigation-menu"
 import CartSheet from "../../components/cart-sheet"
 import MobileMenu from "../../../mobile-menu"
 import { InternalLink } from "../../../common/components/internal-link"
+import CountryMenu from "./select-country"
 
 const Nav = () => {
   const pathname = usePathname()
@@ -62,10 +63,11 @@ const Nav = () => {
           )}
         >
           <div className="flex w-full items-center justify-between">
-            <div className="flex-1 basis-0 h-full flex items-center">
+            <div className="flex-1 h-full flex items-center">
               <div className="sm:hidden">
                 <MobileMenu />
               </div>
+              <CountryMenu />
             </div>
 
             <div className="flex items-center h-full">
@@ -77,7 +79,7 @@ const Nav = () => {
             <div className="flex items-center gap-x-2 h-full flex-1 basis-0 justify-end">
               <div className="hidden small:flex items-center gap-x-2 h-full">
                 {process.env.FEATURE_SEARCH_ENABLED && <DesktopSearchModal />}
-                <InternalLink variant="link" href="/account">
+                <InternalLink variant="default" href="/account">
                   Konto
                 </InternalLink>
               </div>

@@ -1,7 +1,7 @@
 import { useMobileMenu } from "@lib/context/mobile-menu-context"
 import Container from "@modules/mobile-menu/components/container"
 import MainMenu from "@modules/mobile-menu/components/main-menu"
-import CountryMenu from "../components/country-menu"
+import CountryMenu from "../../layout/templates/nav/select-country"
 import SearchMenu from "../components/search-menu"
 
 const MobileMenu = () => {
