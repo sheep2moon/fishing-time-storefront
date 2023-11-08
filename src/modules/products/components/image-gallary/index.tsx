@@ -13,12 +13,15 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
   return (
     <div className="flex items-start relative w-full mx-auto">
       <div className="flex flex-col flex-1 small:mx-16 gap-y-4 ">
-        <div className="relative aspect-square w-full  my-1 shadow-md">
+        <div className="relative aspect-square w-full my-1 shadow-md">
           <Image
-            src={images[currentImage]?.url}
-            layout="fill"
-            objectFit="contain"
-            className="absolute inset-0"
+            src={
+              images[currentImage]?.url
+                ? images[currentImage].url
+                : "/image-placeholder.png"
+            }
+            fill
+            className="object-cover"
             alt={`podgląd produktu ${currentImage + 1}`}
           />
         </div>
@@ -35,9 +38,8 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                 <span className="sr-only">Idź do zdjęcia {index + 1}</span>
                 <Image
                   src={image.url}
-                  layout="fill"
-                  objectFit="contain"
-                  className="absolute inset-0 "
+                  fill
+                  className="absolute inset-0 object-contain"
                   alt="Thumbnail"
                 />
               </button>

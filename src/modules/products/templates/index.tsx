@@ -9,6 +9,10 @@ import MobileActions from "@modules/products/components/mobile-actions"
 
 import ProductActions from "../components/product-actions"
 import { PricedProduct } from "@medusajs/client-types"
+import CategoryBreadcrumbs from "../../store/components/category-breadcrumbs"
+import { Button } from "../../common/components/button"
+import { ChevronLeft } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 type ProductTemplateProps = {
   product: PricedProduct
@@ -17,12 +21,21 @@ type ProductTemplateProps = {
 const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
   const info = useRef<HTMLDivElement>(null)
   const inView = useIntersection(info, "0px")
+  const router = useRouter()
   console.log(product)
 
   return (
     <ProductProvider product={product}>
       <div className="content-container">
-        <div className="grid grid-cols-1 small:grid-cols-2 py-8">
+        <div className="p-1 flex items-center">
+          <Button variant="ghost" onClick={() => router.back()}>
+            <ChevronLeft /> Wróć
+          </Button>
+          {product.categories && (
+            <CategoryBreadcrumbs categories={product.categories} />
+          )}
+        </div>
+        <div className="grid grid-cols-1 small:grid-cols-2 py-8 w-full bg-primary-100/40">
           <ImageGallery images={product?.images || []} />
           <ProductActions product={product} />
         </div>

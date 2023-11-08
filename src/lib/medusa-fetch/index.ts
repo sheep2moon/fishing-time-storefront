@@ -34,6 +34,7 @@ export default async function medusaRequest(
 
   const limit = payload?.query?.limit || 100
   const offset = payload?.query?.offset || 0
+  console.log(path)
 
   try {
     const result = await fetch(`${ENDPOINT}/store${path}`, options)

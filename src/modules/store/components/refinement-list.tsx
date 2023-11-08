@@ -20,7 +20,7 @@ type CustomRefinementListProps = RefinementListProps & {
 const RefinementList = (props: CustomRefinementListProps) => {
   const { items, refine } = useRefinementList({ ...props, showMore: true })
   // console.log(items)
-
+  if (items.length === 0) return null
   return (
     <Card>
       <CardHeader>

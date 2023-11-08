@@ -107,10 +107,7 @@ export const ProductProvider = ({
 
   // memoized function to get the price of the current variant
   const formattedPrice = useMemo(() => {
-    console.log(currentVariant, cart?.region)
-
     if (currentVariant && cart?.region) {
-      console.log(currentVariant, cart.region)
       return "cena wariantu<-"
     } else if (cart?.region) {
       return "brak wariantu"

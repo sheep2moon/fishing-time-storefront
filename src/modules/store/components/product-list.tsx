@@ -1,49 +1,27 @@
 "use client"
-
-import React, { useMemo } from "react"
-import { useInfiniteHits } from "react-instantsearch"
+import { useQuery } from "@tanstack/react-query"
+import React from "react"
+import { getProductsByCategoryId } from "../../../lib/data"
 import ProductPreview from "../../products/components/product-preview"
-import { ProductVariant } from "@medusajs/client-types"
-import { useCart } from "medusa-react"
 
-export type ProductHit = {
-  title: string
-  handle: string
-  description: string | null
-  thumbnail: string | null
-  variants: {
-    id: string
-    title: string
-    inventory_quantity: number
-    prices: {
-      amount: number
-      currency_code: "pln"
-      // price_type: "default" | "sale"
-    }[]
-  }[]
-  hs_code: string | null
+type ProductListProps = {
+  category_id: string
 }
 
-const ProductList = () => {
-  const { hits, results } = useInfiniteHits()
-
-  const products: ProductHit[] = useMemo(() => {
-    return [...hits] as unknown as ProductHit[]
-  }, [hits])
-
+const ProductList = ({ category_id }: ProductListProps) => {
+  const { data, isLoading } = useQuery(["category-products", category_id], () =>
+    getProductsByCategoryId(category_id, 0)
+  )
+  React.useEffect(() => {
+    console.log("data", data)
+  }, [data])
   return (
-    <>
-      {products.length > 0 && (
-        <div className="lg:grid-cols-4 grid grid-cols-1 p-4 gap-2">
-          {products.map((product) => (
-            <ProductPreview {...product} key={product.handle} />
-          ))}
-        </div>
-      )}
-      {products.length === 0 && (
-        <div className="p-4 text-xl text-center w-full">Brak wyników 🙁</div>
-      )}
-    </>
+    <div className="grid grid-cols-3 gap-2">
+      {data?.products &&
+        data.products.map((product) => (
+          <ProductPreview product={product} key={product.id} />
+        ))}
+    </div>
   )
 }
 
