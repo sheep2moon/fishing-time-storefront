@@ -10,30 +10,6 @@ import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 // The API_BASE_URL is set in the .env file. It is the base URL of your Next.js app.
 // const API_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:8000"
 
-/**
- * Fetches a product by handle, using the Medusa API or the Medusa Product Module, depending on the feature flag.
- * @param handle (string) - The handle of the product to retrieve
- * @returns (array) - An array of products (should only be one)
- */
-export async function getProductByHandle(
-  handle: string
-): Promise<{ product: PricedProduct }> {
-  const { products } = await medusaRequest("GET", "/products", {
-    query: {
-      handle,
-      expand: "categories",
-    },
-  })
-    .then((res) => res.body)
-    .catch((err) => {
-      throw err
-    })
-
-  return {
-    product: products[0],
-  }
-}
-
 export async function getCategoryByHandle(
   handle: string
 ): Promise<{ product_category: ProductCategory }> {

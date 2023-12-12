@@ -1,11 +1,11 @@
 import { medusaClient } from "@lib/config"
 import { LOGIN_VIEW, useAccount } from "@lib/context/account-context"
-import Button from "@modules/common/components/button"
-import Input from "@modules/common/components/input"
 import Spinner from "@modules/common/icons/spinner"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { FieldValues, useForm } from "react-hook-form"
+import { Input } from "../../../common/components/input"
+import { Button } from "../../../common/components/button"
 
 interface SignInCredentials extends FieldValues {
   email: string
@@ -45,24 +45,24 @@ const Login = () => {
           <Spinner size={24} />
         </div>
       )}
-      <h1 className="text-large-semi uppercase mb-6">Welcome back</h1>
+      <h1 className="text-lg font-bold uppercase mb-6">Witamy ponownie</h1>
       <p className="text-center text-base-regular text-gray-700 mb-8">
-        Sign in to access an enhanced shopping experience.
+        Zaloguj się na swoje konto.
       </p>
       <form className="w-full" onSubmit={onSubmit}>
         <div className="flex flex-col w-full gap-y-2">
+          <label htmlFor="email">Email</label>
           <Input
-            label="Email"
+            id="email"
             {...register("email", { required: "Email is required" })}
             autoComplete="email"
-            errors={errors}
           />
+          <label htmlFor="password">Hasło</label>
           <Input
-            label="Password"
+            id="password"
             {...register("password", { required: "Password is required" })}
             type="password"
             autoComplete="current-password"
-            errors={errors}
           />
         </div>
         {authError && (
@@ -72,15 +72,17 @@ const Login = () => {
             </span>
           </div>
         )}
-        <Button className="mt-6">Enter</Button>
+        <Button className="mt-6 w-full" variant="secondary">
+          Dalej
+        </Button>
       </form>
-      <span className="text-center text-gray-700 text-small-regular mt-6">
-        Not a member?{" "}
+      <span className="text-center text-gray-700 text-sm mt-6">
+        Nie masz konta?{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.REGISTER)}
           className="underline"
         >
-          Join us
+          Przejdź do rejestracji
         </button>
         .
       </span>

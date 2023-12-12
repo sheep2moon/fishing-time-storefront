@@ -71,12 +71,12 @@ const CartSheet = () => {
                 <div className="bg-gray-900 text-small-regular flex items-center justify-center w-6 h-6 rounded-full text-white">
                   <span>0</span>
                 </div>
-                <span>Your shopping bag is empty.</span>
+                <span>Twój koszyk jest pusty.</span>
                 <div>
                   <Link href="/store">
                     <>
-                      <span className="sr-only">Go to all products page</span>
-                      <Button onClick={close}>Explore products</Button>
+                      <span className="sr-only">Nawiguj do sklepu</span>
+                      <Button onClick={close}>Przeglądaj produkty</Button>
                     </>
                   </Link>
                 </div>

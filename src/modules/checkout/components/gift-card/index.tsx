@@ -1,10 +1,10 @@
 import { Cart } from "@medusajs/medusa"
-import Button from "@modules/common/components/button"
-import Input from "@modules/common/components/input"
 import Trash from "@modules/common/icons/trash"
 import { useCart } from "medusa-react"
 import React, { useMemo } from "react"
 import { useForm } from "react-hook-form"
+import { Input } from "../../../common/components/input"
+import { Button } from "../../../common/components/button"
 
 type GiftCardFormValues = {
   gift_card_code: string
@@ -95,18 +95,14 @@ const GiftCard: React.FC<GiftCardProps> = ({ cart }) => {
           <form onSubmit={handleSubmit(onSubmit)} className="w-full">
             <div className="grid grid-cols-[1fr_80px] gap-x-2">
               <Input
-                label="Code"
                 {...register("gift_card_code", {
                   required: "Code is required",
                 })}
-                errors={errors}
-                touched={touchedFields}
               />
               <div>
                 <Button
                   className="!min-h-[0] h-[46px] w-[80px]"
                   disabled={isLoading}
-                  isLoading={isLoading}
                 >
                   Apply
                 </Button>

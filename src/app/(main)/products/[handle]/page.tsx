@@ -1,10 +1,10 @@
-import { getProductByHandle } from "@lib/data"
 import ProductTemplate from "@modules/products/templates"
 import { useQuery } from "@tanstack/react-query"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { fetchProductByHandle } from "../../../../lib/medusa-client-fetch"
 import { PricedProduct } from "@medusajs/client-types"
+import { getProductByHandle } from "../../../../lib/data/products"
 
 type Props = {
   params: { handle: string }

@@ -1,9 +1,9 @@
 import { useCheckout } from "@lib/context/checkout-context"
-import Button from "@modules/common/components/button"
-import Checkbox from "@modules/common/components/checkbox"
 import Spinner from "@modules/common/icons/spinner"
 import BillingAddress from "../billing_address"
 import ShippingAddress from "../shipping-address"
+import { Checkbox } from "../../../common/components/checkbox"
+import { Button } from "../../../common/components/button"
 
 const Addresses = () => {
   const {
@@ -19,17 +19,13 @@ const Addresses = () => {
         <div className="bg-gray-900 w-8 h-8 rounded-full text-white flex justify-center items-center text-sm">
           1
         </div>
-        <h2>Shipping address</h2>
+        <h2>Adres dostawy</h2>
       </div>
       {isEdit ? (
         <div className="px-8 pb-8">
           <ShippingAddress />
           <div className="mt-6">
-            <Checkbox
-              label="Same as billing address"
-              checked={checked}
-              onChange={onChange}
-            />
+            <Checkbox checked={checked} onChange={onChange} />
           </div>
           {!checked && (
             <div>

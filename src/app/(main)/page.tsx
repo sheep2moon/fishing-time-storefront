@@ -1,18 +1,19 @@
-import FeaturedProducts from "@modules/home/components/featured-products"
+import FeaturedProducts from "@modules/home/components/latest-products"
 import Hero from "@modules/home/components/hero"
 import { Metadata } from "next"
+import LatestProducts from "@modules/home/components/latest-products"
 
 export const metadata: Metadata = {
-  title: "Home",
+  title: "Strona główna",
   description:
-    "Shop all available models only at the ACME. Worldwide Shipping. Secure Payment.",
+    "Sklep wędkarski Fishing Time. Szeroki wybór asortymentu wędkarskiego.",
 }
 
 const Home = () => {
   return (
     <div className="mt-16">
       {/* <Hero /> */}
-      {/* <FeaturedProducts /> */}
+      <LatestProducts />
     </div>
   )
 }

@@ -36,7 +36,7 @@ const LineItemPrice = React.forwardRef<
         <>
           <p>
             {style === "default" && (
-              <span className="text-gray-500">Original: </span>
+              <span className="text-gray-500">Wcześniej: </span>
             )}
             <span className="line-through">
               {formatAmount({

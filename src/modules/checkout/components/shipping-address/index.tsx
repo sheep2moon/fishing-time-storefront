@@ -1,10 +1,10 @@
 import { CheckoutFormValues } from "@lib/context/checkout-context"
 import { emailRegex } from "@lib/util/regex"
 import ConnectForm from "@modules/common/components/connect-form"
-import Input from "@modules/common/components/input"
 import { useMeCustomer } from "medusa-react"
 import AddressSelect from "../address-select"
 import CountrySelect from "../country-select"
+import { Input } from "../../../common/components/input"
 
 const ShippingAddress = () => {
   const { customer } = useMeCustomer()

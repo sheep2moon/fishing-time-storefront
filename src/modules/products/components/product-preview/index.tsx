@@ -69,7 +69,11 @@ const ProductPreview = ({ product }: ProductPreviewProps) => {
   // }, [variants, selectedVariant, cart?.region])
 
   return (
-    <div className={cn("shadow-lg shadow-slate-300 rounded-md p-1 w-full")}>
+    <div
+      className={cn(
+        "shadow-lg shadow-slate-300 bg-white rounded-md p-1 w-full"
+      )}
+    >
       <div className="max-w-xs w-full">
         <div className=" flex flex-col justify-between h-full">
           <div className="p-1 relative">

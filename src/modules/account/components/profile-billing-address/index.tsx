@@ -1,11 +1,11 @@
 import { useAccount } from "@lib/context/account-context"
 import { Customer, StorePostCustomersCustomerReq } from "@medusajs/medusa"
-import Input from "@modules/common/components/input"
 import NativeSelect from "@modules/common/components/native-select"
 import { useRegions, useUpdateMe } from "medusa-react"
 import React, { useEffect, useMemo } from "react"
 import { useForm, useWatch } from "react-hook-form"
 import AccountInfo from "../account-info"
+import { Input } from "../../../common/components/input"
 
 type MyInformationProps = {
   customer: Omit<Customer, "password_hash">

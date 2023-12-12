@@ -16,13 +16,14 @@ import {
 import { Button } from "../../../common/components/button"
 import { Input } from "../../../common/components/input"
 import { InstantSearch } from "react-instantsearch"
+import { useState } from "react"
 
 const DesktopSearchModal = () => {
-  const { state, close, open } = useToggleState()
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <div>
-      <Dialog>
+      <Dialog open={isOpen} onOpenChange={(state) => setIsOpen(state)}>
         <DialogTrigger asChild>
           <Button className="gap-2" variant="outline">
             <Search />
@@ -50,7 +51,9 @@ const DesktopSearchModal = () => {
             </InstantSearch>
           </div>
           <DialogFooter>
-            <Button variant="ghost">Zamknij</Button>
+            <Button onClick={() => setIsOpen(false)} variant="ghost">
+              Zamknij
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

@@ -66,7 +66,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
           setError(
             "discount_code",
             {
-              message: "Code is invalid",
+              message: "Kod jest nieprawidłowy",
             },
             {
               shouldFocus: true,
@@ -91,7 +91,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
   return (
     <div className="w-full bg-white flex flex-col">
       <div className="mb-4">
-        <h3 className="text-base-semi">Discount</h3>
+        <h3 className="text-base-semi">Kod rabatowy</h3>
       </div>
       <div className="text-small-regular">
         {appliedDiscount ? (
@@ -124,7 +124,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                   className="!min-h-[0] h-[46px] w-[80px]"
                   disabled={isLoading}
                 >
-                  Apply
+                  Zastosuj
                 </Button>
               </div>
             </div>

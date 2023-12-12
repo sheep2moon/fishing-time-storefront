@@ -11,7 +11,7 @@ const ItemsTemplate = ({ items, region }: ItemsTemplateProps) => {
   return (
     <div>
       <div className="border-b border-gray-200 pb-3 flex items-center">
-        <h1 className="text-xl-semi">Shopping Bag</h1>
+        <h1 className="text-xl-semi">Koszyk</h1>
       </div>
       <div className="grid grid-cols-1 gap-y-8 py-8">
         {items && region

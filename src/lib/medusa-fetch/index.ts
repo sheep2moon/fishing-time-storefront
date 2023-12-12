@@ -4,7 +4,7 @@ const ENDPOINT =
   process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || "http://localhost:9000"
 
 export default async function medusaRequest(
-  method: string,
+  method: "GET" | "POST",
   path = "",
   payload?: {
     query?: Record<string, any>
