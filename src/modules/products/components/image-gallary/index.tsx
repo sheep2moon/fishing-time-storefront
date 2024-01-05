@@ -13,7 +13,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
   return (
     <div className="flex items-start relative w-full mx-auto">
       <div className="flex flex-col flex-1 small:mx-16 gap-y-4 ">
-        <div className="relative aspect-square w-full my-1 shadow-md">
+        <div className="relative aspect-square w-full max-h-[500px] my-1 shadow-md">
           <Image
             src={
               images[currentImage]?.url
@@ -21,7 +21,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                 : "/image-placeholder.png"
             }
             fill
-            className="object-cover"
+            className="object-contain"
             alt={`podgląd produktu ${currentImage + 1}`}
           />
         </div>

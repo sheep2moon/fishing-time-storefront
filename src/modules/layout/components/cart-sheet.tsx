@@ -52,7 +52,7 @@ const CartSheet = () => {
                       key={item.id}
                     >
                       <Thumbnail thumbnail={item.thumbnail} size="full" />
-                      <div>
+                      <div className="">
                         <h3 className="line-clamp-2">{item.title}</h3>
                         <LineItemOptions variant={item.variant} />
                         <LineItemPrice
@@ -60,6 +60,12 @@ const CartSheet = () => {
                           item={item}
                           style="tight"
                         />
+                        <button
+                          onClick={() => deleteItem(item.id)}
+                          className=""
+                        >
+                          Usuń
+                        </button>
                       </div>
                     </div>
                   ))}

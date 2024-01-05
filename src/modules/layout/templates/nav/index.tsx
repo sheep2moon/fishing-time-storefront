@@ -5,7 +5,6 @@ import Hamburger from "@modules/common/components/hamburger"
 import CartDropdown from "@modules/layout/components/cart-dropdown"
 import DropdownMenu from "@modules/layout/components/dropdown-menu"
 import DesktopSearchModal from "@modules/search/templates/desktop-search-modal"
-import clsx from "clsx"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -15,6 +14,10 @@ import CartSheet from "../../components/cart-sheet"
 import MobileMenu from "../../../mobile-menu"
 import { InternalLink } from "../../../common/components/internal-link"
 import CountryMenu from "./select-country"
+import Image from "next/image"
+import { Input } from "../../../common/components/input"
+import { Button } from "../../../common/components/button"
+import { Search as SearchIcon } from "lucide-react"
 
 const Nav = () => {
   const pathname = usePathname()
@@ -48,45 +51,54 @@ const Nav = () => {
 
   return (
     <div
-      className={clsx("sticky bg-primary top-0 left-0 right-0 z-50 group", {
+      className={cn("sticky bg-white top-0 left-0 right-0 z-50 group", {
         "!fixed": isHome,
       })}
     >
-      <header
-        className={cn(
-          "relative py-2 px-2 sm:px-8 mx-auto max-w-screen-2xlarge transition-colors border-b border-transparent duration-200 group-hover:bg-white group-hover:border-gray-200 text-primary-950"
-        )}
-      >
-        <nav
-          className={cn(
-            "flex items-center flex-col justify-between w-full text-small-regular transition-colors duration-200"
-          )}
-        >
+      <header className="pb-2 pt-4 text-primary-950">
+        <nav className="flex items-center flex-col justify-between w-full text-small-regular transition-colors duration-200 max-w-screen-large mx-auto gap-2">
           <div className="flex w-full items-center justify-between">
-            <div className="flex-1 h-full flex items-center">
-              <div className="sm:hidden">
-                <MobileMenu />
-              </div>
-              <CountryMenu />
+            <div className="sm:hidden flex-1 h-full flex items-center">
+              <MobileMenu />
             </div>
 
-            <div className="flex items-center h-full">
+            <div className="flex items-center justify-between w-full">
+              {/* LOGO */}
               <Link href="/" className="text-xl-semi uppercase">
-                Fishing Time
+                <Image
+                  alt="store logo"
+                  width={340}
+                  height={0}
+                  src="/store-logo.svg"
+                />
               </Link>
-            </div>
-
-            <div className="flex items-center gap-x-2 h-full flex-1 basis-0 justify-end">
-              <div className="hidden small:flex items-center gap-x-2 h-full">
-                {process.env.FEATURE_SEARCH_ENABLED && <DesktopSearchModal />}
-                <InternalLink variant="default" href="/account">
-                  Konto
-                </InternalLink>
+              {/* SEARCH */}
+              <div className="flex justify-center w-full px-2 items-center">
+                <Input
+                  placeholder="Wyszukaj produkt"
+                  type="search"
+                  className="w-full max-w-lg"
+                />
+                <Button className="-ml-2 rounded-l-none gap-2 text-primary-500">
+                  <SearchIcon className="w-4" />
+                  Szukaj
+                </Button>
               </div>
-              <CartSheet />
+              {/* CART & OPTIONS */}
+              <div className="flex items-center gap-x-2 h-full flex-1 basis-0 justify-end">
+                <div className="hidden small:flex items-center gap-x-2 h-full">
+                  {/* <DesktopSearchModal /> */}
+                  <InternalLink variant="default" href="/account">
+                    Konto
+                  </InternalLink>
+                </div>
+                <CartSheet />
+              </div>
             </div>
           </div>
-          <CategoriesNavigationMenu />
+          <div className="hidden sm:block">
+            <CategoriesNavigationMenu />
+          </div>
         </nav>
       </header>
     </div>

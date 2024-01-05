@@ -1,8 +1,8 @@
 "use client"
 import { useQuery } from "@tanstack/react-query"
 import React from "react"
-import { getProductsByCategoryId } from "../../../lib/data"
 import ProductPreview from "../../products/components/product-preview"
+import { getProductsByCategoryId } from "../../../lib/medusa-fetch/category"
 
 type ProductListProps = {
   category_id: string

@@ -20,21 +20,11 @@ export async function GET(
   const products = await productService.list(
     { handle },
     {
-      relations: [
-        "variants",
-        "variants.options",
-        "tags",
-        "options",
-        "options.values",
-        "images",
-        "description",
-        "collection",
-        "status",
-      ],
+      relations: ["categories", "images"],
       take: 1,
     }
   )
 
   // Return the response
-  return NextResponse.json({ products })
+  return NextResponse.json({ product: products[0] })
 }

@@ -1,10 +1,7 @@
 import ProductTemplate from "@modules/products/templates"
-import { useQuery } from "@tanstack/react-query"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { fetchProductByHandle } from "../../../../lib/medusa-client-fetch"
-import { PricedProduct } from "@medusajs/client-types"
-import { getProductByHandle } from "../../../../lib/data/products"
+import { getProductByHandle } from "../../../../lib/medusa-fetch/products"
 
 type Props = {
   params: { handle: string }
@@ -32,5 +29,5 @@ export default async function ProductPage({ params }: Props) {
   const { product } = await getProductByHandle(params.handle)
 
   if (!product) notFound()
-  return <ProductTemplate product={product as unknown as PricedProduct} />
+  return <ProductTemplate product={product} />
 }

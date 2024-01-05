@@ -7,6 +7,8 @@ import { useMemo, useState } from "react"
 import { formatAmount, useCart } from "medusa-react"
 import { Button } from "../../../common/components/button"
 import { ProductHit } from "../../../store/components/product-hits"
+import { CalculatedVariant } from "../../../../types/medusa"
+import { getPercentageDiff } from "../../../../lib/util/get-precentage-diff"
 
 type ProductPreviewProps = {
   product: Product
@@ -19,54 +21,32 @@ const ProductPreview = ({ product }: ProductPreviewProps) => {
   >(null)
 
   // const formattedPrice = useMemo(() => {
-  //   if (!cart?.region) return "Ustaw kraj wysyłki"
-  //   if (!product.variants) return "-"
-  //   only one variant
-  //   if ((product.variants && product.variants.length === 1 && product.variants[0])) {
-  //     const formattedAmount = formatAmount({
-  //       amount: product.variants[0].prices[0].amount,
-  //       region: cart?.region,
-  //       includeTaxes: false,
-  //       locale: "pl-PL",
-  //     })
-  //     return formattedAmount
-  //   }
-  //   if (selectedVariant) {
-  //     return formatAmount({
-  //       amount: selectedVariant.prices[0].amount,
-  //       region: cart?.region,
-  //       includeTaxes: false,
-  //       locale: "pl-PL",
-  //     })
-  //   }
-  //   calculate cheapest and expensiveness amount
-  //   const rawPrice = product.variants.reduce(
-  //     (acc, variant) => {
-  //       if (variant.prices[0].amount < acc.from) {
-  //         acc.from = variant.prices[0].amount
-  //       }
-  //       if (variant.prices[0].amount > acc.to) {
-  //         acc.to = variant.prices[0].amount
-  //       }
-  //       return acc
-  //     },
-  //     { from: variants[0].prices[0].amount, to: variants[0].prices[0].amount }
-  //   )
-  //   const formattedFrom = formatAmount({
-  //     amount: rawPrice.from,
-  //     region: cart?.region,
-  //     includeTaxes: false,
-  //     locale: "pl-PL",
+  //   console.log(product.variants)
+  //   if (!cart) return null
+  //   const variants = product.variants as unknown as CalculatedVariant[]
+
+  //   const cheapestVariant = variants.reduce((prev, curr) => {
+  //     return prev.calculated_price < curr.calculated_price ? prev : curr
   //   })
-  //   if (rawPrice.from === rawPrice.to) return formattedFrom
-  //   const formattedTo = formatAmount({
-  //     amount: rawPrice.to,
-  //     region: cart?.region,
-  //     includeTaxes: false,
-  //     locale: "pl-PL",
-  //   })
-  //   return `${formattedFrom} - ${formattedTo}`
-  // }, [variants, selectedVariant, cart?.region])
+  //   console.log(cheapestVariant)
+  //   return {
+  //     calculated_price: formatAmount({
+  //       amount: cheapestVariant.prices[0].amount,
+  //       region: cart.region,
+  //       includeTaxes: false,
+  //     }),
+  //     original_price: formatAmount({
+  //       amount: cheapestVariant.original_price,
+  //       region: cart.region,
+  //       includeTaxes: false,
+  //     }),
+  //     price_type: cheapestVariant.calculated_price_type,
+  //     percentage_diff: getPercentageDiff(
+  //       cheapestVariant.original_price,
+  //       cheapestVariant.calculated_price
+  //     ),
+  //   }
+  // }, [product, cart])
 
   return (
     <div
@@ -105,9 +85,9 @@ const ProductPreview = ({ product }: ProductPreviewProps) => {
             <span className="border-t border-emerald-900 px-1 font-semibold text-base inline-block h-12 leading-6 text-ellipsis overflow-hidden">
               {product.title}
             </span>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center max-w-full overflow-hidden">
               <span className="p-2">cena</span>
-              <Button>Dodaj do koszyka</Button>
+              <Button className="px-4">Do koszyka</Button>
             </div>
           </div>
         </div>

@@ -18,10 +18,7 @@ const CategoriesNavigationMenu = () => {
   const { product_categories } = useProductCategories()
 
   return (
-    <div className="w-full justify-center flex items-center gap-1">
-      <InternalLink variant="default" href={"/store"}>
-        Sklep
-      </InternalLink>
+    <div className="w-full justify-start flex items-center gap-1">
       <NavigationMenu>
         <NavigationMenuList>
           {product_categories?.map((category) => {
@@ -31,7 +28,10 @@ const CategoriesNavigationMenu = () => {
 
             return (
               <NavigationMenuItem key={category.id}>
-                <NavigationMenuTrigger key={category.id}>
+                <NavigationMenuTrigger
+                  className="rounded-sm dark:bg-transparent uppercase"
+                  key={category.id}
+                >
                   {category.name}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
